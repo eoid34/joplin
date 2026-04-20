@@ -1,5 +1,5 @@
-name: Joplin Continuous Integration
-on: [push, pull_request]
+name: Joplin Continuous Integration 2
+on: [workflow_dispatch,push, pull_request]
 
 jobs:
   Main:
