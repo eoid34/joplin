@@ -48,6 +48,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ matrix.os }}
+          name: run-${{ github.run_id }}-build-${{ matrix.os }}
           path: packages/app-desktop/dist/JoplinPortable.exe
           if-no-files-found: error
