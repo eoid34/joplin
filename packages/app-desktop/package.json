@@ -51,18 +51,17 @@
       "rfc3161TimeStampServer": "http://timestamp.digicert.com",
       "icon": "../../Assets/ImageSources/Joplin.ico",
       "target": [
-        {
+        /*{
           "target": "nsis",
           "arch": [
             "x64",
             "ia32"
           ]
-        },
+        },*/
         {
           "target": "portable",
           "arch": [
-            "x64",
-            "ia32"
+            "x64"
           ]
         }
       ],
