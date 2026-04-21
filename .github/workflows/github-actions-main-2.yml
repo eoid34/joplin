@@ -49,5 +49,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-${{ matrix.os }}
-          path: packages/app-desktop/dist/
+          path: packages/app-desktop/dist/JoplinPortable.exe
           if-no-files-found: error
