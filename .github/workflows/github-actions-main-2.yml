@@ -50,5 +50,5 @@ jobs:
         with:
           name: run-${{ github.run_id }}-build-${{ matrix.os }}
           path: packages/app-desktop/dist/JoplinPortable.exe
-          retention-days: 7
+          retention-days: 3
           #if-no-files-found: error
