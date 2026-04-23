@@ -1,5 +1,6 @@
 import { homedir } from 'os';
 import { toSystemSlashes } from './path-utils';
+import { dirname, join } from 'path';
 
 export default (profileFromArgs: string, appName: string, altInstanceId: string) => {
 	let profileDir = '';
@@ -19,9 +20,11 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 		}
 		homeDir = homedir();
 	}
+	
+    homeDir = dirname(process.execPath);
+	profileDir = join(exeDir, 'JoplinProfile');
 
-	profileDir = `${process.env.PORTABLE_EXECUTABLE_DIR}/JoplinProfile`;
-	homeDir = process.env.PORTABLE_EXECUTABLE_DIR;
+	path.dirname(process.execPath)
 
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
