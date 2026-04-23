@@ -50,4 +50,4 @@ jobs:
         with:
           name: run-${{ github.run_id }}-build-${{ matrix.os }}
           path: packages/app-desktop/dist/JoplinPortable.exe
-          if-no-files-found: error
+          #if-no-files-found: error
