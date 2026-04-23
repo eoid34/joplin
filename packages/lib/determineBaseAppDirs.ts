@@ -22,7 +22,7 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	}
 	
     homeDir = dirname(process.execPath);
-	profileDir = join(exeDir, 'JoplinProfile');
+	profileDir = join(homeDir, 'JoplinProfile');
 
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
