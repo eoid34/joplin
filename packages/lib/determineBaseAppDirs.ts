@@ -1,10 +1,12 @@
 import { homedir } from 'os';
 import { toSystemSlashes } from './path-utils';
 import { dirname, join } from 'path';
+import { app } from 'electron';
 
 export default (profileFromArgs: string, appName: string, altInstanceId: string) => {
 	let profileDir = '';
 	let homeDir = '';
+	let dataDir = '';
 
 	if (profileFromArgs) {
 		profileDir = profileFromArgs;
@@ -22,7 +24,9 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	}
 	
     homeDir = dirname(process.execPath);
-	profileDir = join(homeDir, 'JoplinProfile');
+	dataDir = join(homeDir, 'data');
+	app.setPath('userData', join(dataDir, 'user-data'));
+	profileDir = join(dataDir, 'profile');
 
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
