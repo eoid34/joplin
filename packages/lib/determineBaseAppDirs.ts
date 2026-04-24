@@ -1,7 +1,7 @@
 import { homedir } from 'os';
 import { toSystemSlashes } from './path-utils';
 import { dirname, join } from 'path';
-import { app } from 'electron';
+//import { app } from 'electron';
 
 export default (profileFromArgs: string, appName: string, altInstanceId: string) => {
 	let profileDir = '';
@@ -25,7 +25,7 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	
     homeDir = dirname(process.execPath);
 	dataDir = join(homeDir, 'data');
-	app.setPath('userData', join(dataDir, 'user-data'));
+	//app.setPath('userData', join(dataDir, 'user-data'));
 	profileDir = join(dataDir, 'profile');
 
 	return {
