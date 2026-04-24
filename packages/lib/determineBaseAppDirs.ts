@@ -1,14 +1,12 @@
 import { homedir } from 'os';
 import { toSystemSlashes } from './path-utils';
 import { dirname, join } from 'path';
-//import { app } from 'electron';
 
 export default (profileFromArgs: string, appName: string, altInstanceId: string) => {
 	let profileDir = '';
 	let homeDir = '';
-	let dataDir = '';
 
-	if (profileFromArgs) {
+	/*if (profileFromArgs) {
 		profileDir = profileFromArgs;
 		homeDir = profileDir;
 	} else if (process && process.env && process.env.PORTABLE_EXECUTABLE_DIR) {
@@ -21,12 +19,14 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 			profileDir = `${homedir()}/.config/${appName}-${altInstanceId}`;
 		}
 		homeDir = homedir();
+	}*/
+
+	if (!profileFromArgs||!appName||!altInstanceId) {
+	  //nothing
 	}
 	
     homeDir = dirname(process.execPath);
-	dataDir = join(homeDir, 'data');
-	//app.setPath('userData', join(dataDir, 'user-data'));
-	profileDir = join(dataDir, 'profile');
+	profileDir = join(homeDir, 'data', 'profile');
 
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
