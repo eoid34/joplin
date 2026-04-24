@@ -6,7 +6,7 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	let profileDir = '';
 	let homeDir = '';
 
-	/*if (profileFromArgs) {
+	if (profileFromArgs) {
 		profileDir = profileFromArgs;
 		homeDir = profileDir;
 	} else if (process && process.env && process.env.PORTABLE_EXECUTABLE_DIR) {
@@ -19,10 +19,6 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 			profileDir = `${homedir()}/.config/${appName}-${altInstanceId}`;
 		}
 		homeDir = homedir();
-	}*/
-
-	if (!profileFromArgs||!appName||!altInstanceId) {
-	  //nothing
 	}
 	
     homeDir = dirname(process.execPath);
