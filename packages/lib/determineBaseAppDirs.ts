@@ -4,12 +4,17 @@ import { dirname } from 'path';
 
 export default (profileFromArgs: string, appName: string, altInstanceId: string) => {
 	let homeDir = dirname(process.execPath);
-	let profileDir = profileFromArgs;
+	let profileDir = '';
 
-	if (!altInstanceId) {
-		profileDir = `${homeDir}/data/profile`;
+	if (profileFromArgs) {
+		profileDir = profileFromArgs;
 	} else {
-		profileDir = `${homeDir}/data/altprofile/${appName}-${altInstanceId}`;
+		if (!altInstanceId) {
+			//profileDir = `${homeDir}/data/profile`;
+			profileDir = `${homeDir}/JoplinProfile`;
+		} else {
+			profileDir = `${homeDir}/data/altprofile/${appName}-${altInstanceId}`;
+		}
 	}
 	
 	return {
