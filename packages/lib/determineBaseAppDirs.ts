@@ -13,6 +13,7 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	} else {
 		profileDir = `${homeDir}/altprofile/${appName}-${altInstanceId}`;
 	}
+	homeDir = profileDir;
 	
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
