@@ -76,7 +76,7 @@ void registerCustomProtocols();
 const initialCallbackUrl = process.argv.find((arg) => isCallbackUrl(arg));
 
 const { homeDir } = determineBaseAppDirs(profileFromArgs, appName, altInstanceId);
-electronApp.setPath('userData', `${homeDir}/data/user-data`);
+electronApp.setPath('userData', `${homeDir}/user-data`);
 
 const wrapper = new ElectronAppWrapper(electronApp, {
 	env, profilePath: rootProfileDir, isDebugMode, initialCallbackUrl, isEndToEndTesting,
