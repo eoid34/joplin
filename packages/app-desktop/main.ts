@@ -13,6 +13,7 @@ const packageInfo = require('./packageInfo.js');
 import { isCallbackUrl } from '@joplin/lib/callbackUrlUtils';
 import determineBaseAppDirs from '@joplin/lib/determineBaseAppDirs';
 import registerCustomProtocols from './utils/customProtocols/registerCustomProtocols';
+import { dirname } from 'path';
 
 // Electron takes the application name from package.json `name` and
 // displays this in the tray icon toolip and message box titles, however in
@@ -75,8 +76,8 @@ void registerCustomProtocols();
 
 const initialCallbackUrl = process.argv.find((arg) => isCallbackUrl(arg));
 
-const { homeDir } = determineBaseAppDirs(profileFromArgs, appName, altInstanceId);
-electronApp.setPath('userData', `${homeDir}/user-data`);
+//const { homeDir } = determineBaseAppDirs(profileFromArgs, appName, altInstanceId);
+electronApp.setPath('userData', `${dirname(process.execPath)}/JoplinData/user-data`);
 
 const wrapper = new ElectronAppWrapper(electronApp, {
 	env, profilePath: rootProfileDir, isDebugMode, initialCallbackUrl, isEndToEndTesting,
