@@ -12,8 +12,6 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 		profileDir = `${homeDir}/data/altprofile/${appName}-${altInstanceId}`;
 	}
 	
-	profileDir = profileFromArgs;
-
 	return {
 		rootProfileDir: toSystemSlashes(profileDir, 'linux'),
 		homeDir: toSystemSlashes(homeDir, 'linux'),
