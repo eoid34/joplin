@@ -13,7 +13,8 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 			//profileDir = `${homeDir}/data/profile`;
 			profileDir = `${homeDir}/JoplinProfile`;
 		} else {
-			profileDir = `${homeDir}/data/altprofile/${appName}-${altInstanceId}`;
+			//profileDir = `${homeDir}/data/altprofile/${appName}-${altInstanceId}`;
+			profileDir = `${homeDir}/JoplinAltProfile/${appName}-${altInstanceId}`;
 		}
 	}
 	
