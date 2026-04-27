@@ -6,12 +6,10 @@ export default (profileFromArgs: string, appName: string, altInstanceId: string)
 	let homeDir = dirname(process.execPath);
 	let profileDir = profileFromArgs;
 
-	homeDir = `${homeDir}/data`
-
 	if (!altInstanceId) {
-		profileDir = `${homeDir}/profile`;
+		profileDir = `${homeDir}/JoplinProfile/default`;
 	} else {
-		profileDir = `${homeDir}/altprofile/${appName}-${altInstanceId}`;
+		profileDir = `${homeDir}/JoplinProfile/${appName}-${altInstanceId}`;
 	}
 	homeDir = profileDir;
 	
