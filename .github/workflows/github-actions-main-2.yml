@@ -1,0 +1,54 @@
+name: Joplin Continuous Integration 2
+on: [workflow_dispatch]
+
+jobs:
+  Main:
+    # We always process server or desktop release tags, because they also publish the release
+    if: github.repository == 'eoid34/joplin'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        # Do not use unbuntu-latest because it causes `The operation was canceled` failures:
+        # https://github.com/actions/runner-images/issues/6709
+        os: [windows-2025]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup build environment
+        uses: ./.github/workflows/shared/setup-build-environment
+
+      - name: Build and publish Windows app
+        if: runner.os == 'Windows' && startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          IS_CONTINUOUS_INTEGRATION: 1
+          BUILD_SEQUENCIAL: 1
+          SSL_ESIGNER_USER_NAME: ${{ secrets.SSL_ESIGNER_USER_NAME }}
+          SSL_ESIGNER_USER_PASSWORD: ${{ secrets.SSL_ESIGNER_USER_PASSWORD }}
+          SSL_ESIGNER_CREDENTIAL_ID: ${{ secrets.SSL_ESIGNER_CREDENTIAL_ID }}
+          SSL_ESIGNER_USER_TOTP: ${{ secrets.SSL_ESIGNER_USER_TOTP }}
+          SIGN_APPLICATION: 1
+        # To ensure that the operations stop on failure, all commands
+        # should be on one line with "&&" in between.
+        run: |
+          yarn install && cd packages/app-desktop && yarn dist
+
+      # Build and package the Windows app, without publishing it, just to
+      # verify that the build process hasn't been broken.
+      - name: Build Windows app (no publishing)
+        if: runner.os == 'Windows' && !startsWith(github.ref, 'refs/tags/v')
+        env:
+          IS_CONTINUOUS_INTEGRATION: 1
+          BUILD_SEQUENCIAL: 1
+          SERVER_REPOSITORY: joplin/server
+          SERVER_TAG_PREFIX: server
+        run: |
+          yarn install && cd packages/app-desktop && yarn dist --publish=never
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-${{ github.run_id }}-build-${{ matrix.os }}
+          path: packages/app-desktop/dist/JoplinPortable.exe
+          retention-days: 3
+          #if-no-files-found: error
